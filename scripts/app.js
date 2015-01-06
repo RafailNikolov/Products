@@ -98,7 +98,7 @@
             $("#productList").show();
             $("#welcomeGuest").hide();
             var sessionToken = currentUser.sessionToken;
-            ajaxRequester.getProducts(sessionToken, loadProductsSuccess, loadProductsError);
+            ajaxRequester.getProduct(sessionToken, loadProductsSuccess, loadProductsError);
         }
         else{
             showLoginRegisterView();
@@ -194,10 +194,22 @@
 
 
 
-    function loadProductsSuccess(){
+    function loadProductsSuccess(data) {
+        var $productsUl = $("#allProducts ul");
+        $productsUl.html('');
+         //   $productTemplate = $('<li class="product"><div class="product-info"><p class="item-name"></p><p class="category"><span class="pre">Category:</span><span class="category-value"></span></p><p class="price"><span class="pre">Price:</span> $<span class="price-value"></span></p></div><footer class="product-footer"><a href="#"><button class="edit-button">Edit</button></a><a href="#"><button class="delete-button">Delete</button></a></footer></li>');
+        for (var i in data.result) {
+            var product = data.results[i];
+            var $productLi = $('<li>');
+            $productLi.data("product", product);
 
+            var $title = $("<div class='title'>");
+            $title.text(product.name);
+            $productLi.append($title);
+            
+            $productsUl.append($productLi);
+        }
     }
-
     function loadProductsError(){
         showErrorMsg("Load Products failed.");
     }
@@ -227,12 +239,33 @@
 
     function addProductSuccess(){
         showInfoMsg("Product created.");
-        showHomeView();
+        showProductView();
     }
 
     function addProductError(){
         showErrorMsg("Product not created.");
     }
+
+
+
+    //-------------------DELETE PRODUCT------------------
+
+
+
+
+    function deleteProduct(){
+
+    }
+
+    function deleteProductSuccess(){
+        showInfoMsg("Success.");
+        showProductView();
+    }
+
+    function deleteProductError(){
+        showErrorMsg("Failed.");
+    }
+
 
 
 

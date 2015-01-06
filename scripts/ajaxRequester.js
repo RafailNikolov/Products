@@ -36,7 +36,7 @@ var ajaxRequester = (function($) {
         return headersWithToken;
     }
 
-    function getProducts(sessionToken, success, error){
+    function getProduct(sessionToken, success, error){
         var headersWithToken = getHeadersWithSessionToken(sessionToken);
         jQuery.ajax({
             method: "GET",
@@ -65,7 +65,7 @@ var ajaxRequester = (function($) {
         login: login,
         register: register,
         addProduct: addProduct,
-        getProduct: getProducts
+        getProduct: getProduct
     };
 }(jQuery));
 
