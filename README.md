@@ -1,1 +1,1 @@
-products-5.apphb.com
+http://products-5.apphb.com/
